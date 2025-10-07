@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { dashboard, login, register } from '@/routes';
 import { Head, Link } from '@inertiajs/vue3';
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
 
 onMounted(() => {
     initFlowbite();

@@ -7,6 +7,11 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
+import axios from 'axios';
+
+//garanta que o Axios envie o token CSRF automaticamente
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -19,6 +24,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(axios)
             .use(ZiggyVue)
             .mount(el);
     },
