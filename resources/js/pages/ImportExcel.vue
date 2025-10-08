@@ -74,7 +74,7 @@ export default {
 
         async getData() {
             try {
-                const response = await axios.get('/api/crm/data')
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/crm/data`)
                 console.log(response.data)
                 this.data = response.data
 
@@ -98,7 +98,7 @@ export default {
             formData.append('file', this.file)
 
             try {
-                const response = await axios.post('/api/crm/upload', formData, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/crm/upload`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

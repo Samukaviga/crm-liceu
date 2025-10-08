@@ -29,6 +29,11 @@ const mainNavItems: NavItem[] = [
         href: excel(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Trafego Pago',
+        href: '#',
+        icon: LayoutGrid,
+    },
 
 ];
 
