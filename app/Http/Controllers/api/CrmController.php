@@ -18,7 +18,7 @@ class CrmController extends Controller
     {
         // return Inertia::render('ImportExcel');
 
-        return Inertia::render('excel/ImportExcel');
+        return Inertia::render('ImportExcel');
     }
 
 
