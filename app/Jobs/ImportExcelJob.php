@@ -2,35 +2,40 @@
 
 namespace App\Jobs;
 
-use App\Imports\ExcelImport;
+use App\Models\PricingSellflux;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 
 class ImportExcelJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
-    protected string $filePath;
+    protected array $rows;
 
-    public function __construct(string $filePath)
+    public function __construct(array $rows)
     {
-        $this->filePath = $filePath;
+        $this->rows = $rows;
     }
 
     public function handle(): void
     {
-        $fullPath = Storage::path($this->filePath);
+        $data = [];
 
-        if (!file_exists($fullPath)) {
-            \Log::error("Arquivo não encontrado: " . $fullPath);
-            return;
+        foreach ($this->rows as $row) {
+            $data[] = [
+                'value' => $row[0],
+                'project_id' => $row[1],
+                'description' => $row[3],
+                'type' => $row[4],
+                'created_at_sellflux' => $row[5],
+                'canceled' => $row[6],
+            ];
         }
 
-        Excel::import(new ExcelImport, $fullPath);
+        // Bulk insert
+        PricingSellflux::insert($data);
     }
 
     public $timeout = 600;

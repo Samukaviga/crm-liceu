@@ -2,38 +2,27 @@
 
 namespace App\Imports;
 
-use App\Models\PricingSellflux;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Jobs\ImportExcelJob;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 
-class ExcelImport implements ToModel
+class ExcelImport implements ToCollection
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    protected string $filePath;
+
+    public function __construct(string $filePath)
     {
-        return new PricingSellflux([
-            'value' => $row[0],
-            'project_id' => $row[1],
-            'description' => $row[3],
-            'type' => $row[4],
-            'created_at_sellflux' => $row[5],
-            'canceled' => $row[6],
-        ]);
+        $this->filePath = $filePath;
     }
 
-    // Quantos registros são inseridos de uma vez
-    public function batchSize(): int
+    public function collection(Collection $rows)
     {
-        return 500;
-    }
+        // Se você quiser processar em chunks no job:
+        $chunked = $rows->chunk(500); // mesma lógica do chunkSize
 
-    // Quantas linhas são lidas do Excel por vez
-    public function chunkSize(): int
-    {
-        return 500;
+        foreach ($chunked as $chunk) {
+            // Dispara um job para cada chunk
+            ImportExcelJob::dispatch($chunk->toArray());
+        }
     }
-
 }

@@ -30,8 +30,10 @@ class CrmController extends Controller
         // Salva no disco local (storage/app/imports)
         $path = $uploadedFile->storeAs('imports', $filename);
 
+        Excel::import(new ExcelImport($path), $path);
+
         // Dispara o job
-        ImportExcelJob::dispatch($path);
+        //ImportExcelJob::dispatch($path);
 
         return response()->json([
             'message' => 'Arquivo enviado com sucesso! A importação será processada em segundo plano.',
