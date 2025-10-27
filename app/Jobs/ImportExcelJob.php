@@ -23,7 +23,10 @@ class ImportExcelJob implements ShouldQueue
     {
         $data = [];
 
-        foreach ($this->rows as $row) {
+        // Pula a primeira linha (índice 0)
+        $rows = array_slice($this->rows, 1);
+
+        foreach ($rows as $row) {
             $data[] = [
                 'value' => $row[0],
                 'project_id' => $row[1],
@@ -34,7 +37,6 @@ class ImportExcelJob implements ShouldQueue
             ];
         }
 
-        // Bulk insert
         PricingSellflux::insert($data);
     }
 
