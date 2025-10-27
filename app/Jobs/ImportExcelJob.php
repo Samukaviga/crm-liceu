@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Imports\ExcelImport;
-use Illuminate\Bus\Queueable; // ← aqui estava errado
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;

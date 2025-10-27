@@ -23,4 +23,17 @@ class ExcelImport implements ToModel
             'canceled' => $row[6],
         ]);
     }
+
+    // Quantos registros são inseridos de uma vez
+    public function batchSize(): int
+    {
+        return 500;
+    }
+
+    // Quantas linhas são lidas do Excel por vez
+    public function chunkSize(): int
+    {
+        return 500;
+    }
+
 }

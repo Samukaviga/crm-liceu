@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class CrmController extends Controller
 {
@@ -17,7 +18,7 @@ class CrmController extends Controller
     {
         // return Inertia::render('ImportExcel');
 
-        return Inertia::render('ImportExcel');
+        return Inertia::render('excel/ImportExcel');
     }
 
 
@@ -38,8 +39,13 @@ class CrmController extends Controller
     }
 
     public function data()
-    {
+{
+    $data = [
+        'records' => PricingSellflux::orderBy('id', 'desc')->get(),
+        'pending_jobs' => DB::table('jobs')->count(),
+        'failed_jobs' => DB::table('failed_jobs')->count(),
+    ];
 
-        return response()->json(PricingSellflux::orderBy('id', 'desc')->get());
-    }
+    return response()->json($data);
+}
 }
