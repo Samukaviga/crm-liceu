@@ -22,7 +22,7 @@
           <td class="px-6 py-4">{{ value.project_id }}</td>
           <td class="px-6 py-4">{{ value.description }}</td>
           <td class="px-6 py-4">{{ value.type }}</td>
-          <td class="px-6 py-4">{{ value.created_at }}</td>
+          <td class="px-6 py-4">{{ value.created_at_sellflux }}</td>
         </tr>
       </tbody>
     </table>
