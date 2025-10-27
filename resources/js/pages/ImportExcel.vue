@@ -14,7 +14,10 @@
             </div>
         </div>
 
-
+        <div v-if="test" class="text-center max-w-xs p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            Completed
+        </div>
 
 
 
@@ -83,6 +86,7 @@ export default {
             data: [],
             jobs_count: 0,
             jobs_failed: 0,
+            test: false
         }
     },
 
@@ -94,7 +98,8 @@ export default {
         if (window.Echo) {
             window.Echo.channel('test-channel')
                 .listen('TestEvent', (e: any) => {
-                    console.log('Recebido via WebSocket:', e);
+                    this.test = true;
+                    console.log('Recebido via WebSocket:');
                     if (e.pending_jobs !== undefined) this.jobs_count = e.pending_jobs;
                     if (e.failed_jobs !== undefined) this.jobs_failed = e.failed_jobs;
                 });

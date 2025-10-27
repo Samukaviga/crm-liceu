@@ -38,6 +38,9 @@ class ImportExcelJob implements ShouldQueue
         }
 
         PricingSellflux::insert($data);
+
+        broadcast(new \App\Events\TestEvent());
+
     }
 
     public $timeout = 600;
