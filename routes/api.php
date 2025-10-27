@@ -12,3 +12,8 @@ Route::get('/user', function (Request $request) {
 Route::post('/crm/upload', [CrmController::class, 'store']);
 
 Route::get('/crm/data', [CrmController::class, 'data']);
+
+Route::get('/test-broadcast', function () {
+    broadcast(new \App\Events\TestEvent());
+    return 'Evento enviado!';
+});

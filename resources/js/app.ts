@@ -1,5 +1,7 @@
 import '../css/app.css';
 
+import './echo';
+
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
@@ -8,6 +10,11 @@ import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
 import axios from 'axios';
+import { configureEcho } from '@laravel/echo-vue';
+
+configureEcho({
+    broadcaster: 'reverb',
+});
 
 //garanta que o Axios envie o token CSRF automaticamente
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

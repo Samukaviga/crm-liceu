@@ -88,7 +88,17 @@ export default {
 
 
     mounted() {
-        this.getData();
+        this.getData(); // pega os dados atuais da API
+
+        // listener WebSocket
+        if (window.Echo) {
+            window.Echo.channel('test-channel')
+                .listen('TestEvent', (e: any) => {
+                    console.log('Recebido via WebSocket:', e);
+                    if (e.pending_jobs !== undefined) this.jobs_count = e.pending_jobs;
+                    if (e.failed_jobs !== undefined) this.jobs_failed = e.failed_jobs;
+                });
+        }
     },
 
     methods: {

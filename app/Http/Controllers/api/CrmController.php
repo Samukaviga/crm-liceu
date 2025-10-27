@@ -18,7 +18,7 @@ class CrmController extends Controller
     public function index(): Response
     {
         // return Inertia::render('ImportExcel');
-
+        broadcast(new \App\Events\TestEvent());
         return Inertia::render('ImportExcel');
     }
 
