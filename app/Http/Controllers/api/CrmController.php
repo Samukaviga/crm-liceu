@@ -44,7 +44,7 @@ class CrmController extends Controller
     public function data()
 {
     $data = [
-        'records' => PricingSellflux::orderBy('id', 'desc')->get(),
+        'records' => PricingSellflux::all(),
         'pending_jobs' => DB::table('jobs')->count(),
         'failed_jobs' => DB::table('failed_jobs')->count(),
     ];

@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pricing_sellflux', function (Blueprint $table) {
             $table->id();
+
             $table->string('value')->nullable();
             $table->string('project_id')->nullable();
             $table->string('description')->nullable();
             $table->string('type')->nullable();
-            $table->string('created_at_sellflux')->nullable();
+            $table->string('created_at_sellflux')->unique();
             $table->string('canceled')->nullable();
             $table->timestamps();
         });

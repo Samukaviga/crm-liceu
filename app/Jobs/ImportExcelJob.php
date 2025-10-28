@@ -27,6 +27,9 @@ class ImportExcelJob implements ShouldQueue
         $rows = array_slice($this->rows, 1);
 
         foreach ($rows as $row) {
+
+            if (empty($row[5])) continue;
+
             $data[] = [
                 'value' => $row[0],
                 'project_id' => $row[1],
@@ -35,12 +38,22 @@ class ImportExcelJob implements ShouldQueue
                 'created_at_sellflux' => $row[5],
                 'canceled' => $row[6],
             ];
+
+            PricingSellflux::updateOrCreate(
+                ['created_at_sellflux' => $row[5]],
+                [
+                    'value' => $row[0],
+                    'project_id' => $row[1],
+                    'description' => $row[3],
+                    'type' => $row[4],
+                    'canceled' => $row[6],
+                ]
+            );
         }
 
-        PricingSellflux::insert($data);
+        //PricingSellflux::insert($data);
 
         broadcast(new \App\Events\TestEvent());
-
     }
 
     public $timeout = 600;
