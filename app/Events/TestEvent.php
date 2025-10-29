@@ -19,7 +19,7 @@ class TestEvent implements ShouldBroadcast
      */
     public function __construct()
     {
-        //
+
     }
 
 

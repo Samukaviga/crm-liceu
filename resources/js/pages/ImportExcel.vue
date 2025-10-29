@@ -37,11 +37,13 @@
                 role="alert">
                 {{ jobs_failed > 0 ? `Importações com falha: ${jobs_failed}` : 'Nenhuma importação com falha.' }}
             </div>
+
+            <div class="text-center max-w-xs p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                role="alert">
+                Total de linhas: <span class="font-bold "> {{ total }}</span>
+            </div>
+
         </div>
-
-
-
-
 
 
         <section class="bg-white py-8 antialiased dark:bg-black md:py-16">
@@ -67,8 +69,6 @@
                             </button>
 
                         </form>
-
-
 
                     </div>
 
@@ -109,7 +109,8 @@ export default {
             data: [],
             jobs_count: 0,
             jobs_failed: 0,
-            test: false
+            test: false,
+            total: 0,
         }
     },
 
@@ -126,8 +127,8 @@ export default {
                     this.getData(); // atualiza os dados da tabela
 
                     console.log('Recebido via WebSocket:');
-                    if (e.pending_jobs !== undefined) this.jobs_count = e.pending_jobs;
-                    if (e.failed_jobs !== undefined) this.jobs_failed = e.failed_jobs;
+                    //if (e.pending_jobs !== undefined) this.jobs_count = e.pending_jobs;
+                   // if (e.failed_jobs !== undefined) this.jobs_failed = e.failed_jobs;
                 });
         }
     },
@@ -146,6 +147,7 @@ export default {
                 this.data = response.data.records
                 this.jobs_count = response.data.pending_jobs
                 this.jobs_failed = response.data.failed_jobs
+                this.total = response.data.total
 
             } catch (error) {
                 console.error('Erro ao buscar dados:', error)

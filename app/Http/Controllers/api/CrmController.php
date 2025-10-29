@@ -44,9 +44,10 @@ class CrmController extends Controller
     public function data()
 {
     $data = [
-        'records' => PricingSellflux::all(),
+        'records' => PricingSellflux::latest('id')->take(10)->get(),
         'pending_jobs' => DB::table('jobs')->count(),
         'failed_jobs' => DB::table('failed_jobs')->count(),
+        'total' => PricingSellflux::count(),
     ];
 
     return response()->json($data);

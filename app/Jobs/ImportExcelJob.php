@@ -49,11 +49,14 @@ class ImportExcelJob implements ShouldQueue
                     'canceled' => $row[6],
                 ]
             );
+
         }
+
+           broadcast(new \App\Events\TestEvent());
 
         //PricingSellflux::insert($data);
 
-        broadcast(new \App\Events\TestEvent());
+
     }
 
     public $timeout = 600;
