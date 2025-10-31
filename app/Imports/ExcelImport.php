@@ -3,7 +3,9 @@
 namespace App\Imports;
 
 use App\Jobs\ImportExcelJob;
+use App\Models\PricingSellflux;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class ExcelImport implements ToCollection
@@ -23,6 +25,9 @@ class ExcelImport implements ToCollection
         foreach ($chunked as $chunk) {
             // Dispara um job para cada chunk
             ImportExcelJob::dispatch($chunk->toArray());
+
+            broadcast(new \App\Events\CountJobsEvent(DB::table('jobs')->count()));
+
         }
     }
 }
