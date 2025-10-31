@@ -3,7 +3,7 @@
     <AppLayout>
 
 
-        <div v-if="test" id="alert-1"
+        <div v-if="completed" id="alert-1"
             class="flex items-center p-4 mx-5 mt-5 mb-2 text-green-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
             role="alert">
             <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -109,7 +109,7 @@ export default {
             data: [],
             jobs_count: 0,
             jobs_failed: 0,
-            test: false,
+            completed: false,
             total: 0,
         }
     },
@@ -120,9 +120,9 @@ export default {
 
         // listener WebSocket
         if (window.Echo) {
-            window.Echo.channel('test-channel')
-                .listen('TestEvent', (e: any) => {
-                    this.test = true;
+            window.Echo.channel('completed-channel')
+                .listen('ImportCompletedEvent', (e: any) => {
+                    this.completed = true;
                     this.file = null;
                     this.getData(); // atualiza os dados da tabela
 
@@ -137,7 +137,7 @@ export default {
 
 
         closeAlert() {
-            this.test = false;
+            this.completed = false;
         },
 
         async getData() {

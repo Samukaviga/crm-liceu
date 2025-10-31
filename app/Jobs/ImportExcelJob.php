@@ -52,7 +52,7 @@ class ImportExcelJob implements ShouldQueue
 
         }
 
-           broadcast(new \App\Events\TestEvent());
+           broadcast(new \App\Events\ImportCompletedEvent());
 
         //PricingSellflux::insert($data);
 
