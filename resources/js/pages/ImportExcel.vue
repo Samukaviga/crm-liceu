@@ -126,8 +126,8 @@ export default {
              window.Echo.channel('channel-count-jobs')
                 .listen('CountJobsEvent', (e: any) => {
 
-                    console.log('Recebido via WebSocket com o jobs e total:', e.jobs_count);
-                    this.jobs_count = e.jobs_count;
+                    console.log(' WebSocket com o jobs ');
+                    this.getData();
 
                     //if (e.pending_jobs !== undefined) this.jobs_count = e.pending_jobs;
                    // if (e.failed_jobs !== undefined) this.jobs_failed = e.failed_jobs;
