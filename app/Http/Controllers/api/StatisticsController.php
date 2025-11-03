@@ -5,23 +5,24 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Imports\ExcelImport;
-use App\Jobs\ImportExcelJob;
+use App\Imports\StatisticServiceImport;
 use App\Models\PricingSellflux;
+use App\Models\StatisticService;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+
 use Inertia\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
-class CrmController extends Controller
+class StatisticsController extends Controller
 {
     public function index(): Response
     {
         // return Inertia::render('ImportExcel');
         // broadcast(new \App\Events\TestEvent());
-        return Inertia::render('ImportExcel');
+        return Inertia::render('ImportStatistics');
     }
-
 
     public function store(Request $request)
     {
@@ -31,7 +32,7 @@ class CrmController extends Controller
         // Salva no disco local (storage/app/imports)
         $path = $uploadedFile->storeAs('imports', $filename);
 
-        Excel::import(new ExcelImport($path), $path);
+        Excel::import(new StatisticServiceImport($path, $request->school), $path);
 
         // Dispara o job
         //ImportExcelJob::dispatch($path);
@@ -44,10 +45,10 @@ class CrmController extends Controller
     public function data()
     {
         $data = [
-            'records' => PricingSellflux::latest('id')->take(10)->get(),
+            'records' => StatisticService::latest('id')->take(10)->get(),
             'pending_jobs' => DB::table('jobs')->count(),
             'failed_jobs' => DB::table('failed_jobs')->count(),
-            'total' => PricingSellflux::count(),
+            'total' => StatisticService::count(),
         ];
 
         return response()->json($data);

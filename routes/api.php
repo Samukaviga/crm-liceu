@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CrmController;
+use App\Http\Controllers\Api\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +13,10 @@ Route::get('/user', function (Request $request) {
 Route::post('/crm/upload', [CrmController::class, 'store']);
 
 Route::get('/crm/data', [CrmController::class, 'data']);
+
+Route::post('/statistics/upload', [StatisticsController ::class, 'store']);
+
+Route::get('/statistics/data', [StatisticsController ::class, 'data']);
 
 Route::get('/test-broadcast', function () {
     broadcast(new \App\Events\TestEvent());

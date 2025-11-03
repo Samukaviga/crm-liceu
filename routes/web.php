@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CrmController;
+use App\Http\Controllers\Api\StatisticsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,6 +22,10 @@ Route::get('/test-broadcast', function () {
 Route::get('excel', [CrmController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('excel');
+
+Route::get('statistics', [StatisticsController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('statistics');
 
 /*
 Route::post('excel/import', [CrmController::class, 'store'])

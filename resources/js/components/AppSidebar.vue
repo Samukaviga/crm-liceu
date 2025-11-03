@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, excel} from '@/routes';
+import { dashboard, excel, statistics} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
@@ -25,13 +25,13 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Excel',
+        title: 'Gastos Sellflux',
         href: excel(),
         icon: LayoutGrid,
     },
     {
-        title: 'Trafego Pago',
-        href: '#',
+        title: 'Estatísticas Atendimentos',
+        href: statistics(),
         icon: LayoutGrid,
     },
 
