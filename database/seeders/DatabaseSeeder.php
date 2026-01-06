@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Template::create([
-            'school_id' => 1,
+            'school_id' => School::firstWhere('name', 'Colégio Itaqua')->id,
             'name' => 'lembete_v10',
             'number' => '1723393465022698',
         ]);
 
         Template::create([
-            'school_id' => 1,
+            'school_id' => School::firstWhere('name', 'Colégio Itaqua')->id,
             'name' => 'colegio_itaqua_mensalidade_em_aberto_20250808',
             'number' => '2168545506964928',
         ]);

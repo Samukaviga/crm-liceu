@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, excel, statistics} from '@/routes';
+import { dashboard, excel, statistics, template} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
@@ -34,6 +34,12 @@ const mainNavItems: NavItem[] = [
         href: statistics(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Templete Message',
+        href: template(),
+        icon: LayoutGrid,
+    },
+
 
 ];
 

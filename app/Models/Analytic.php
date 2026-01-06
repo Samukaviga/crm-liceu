@@ -10,7 +10,7 @@ class Analytic extends Model
 
     protected $fillable = [
         'template_id',
-        'start_data',
+        'start_date',
         'end_date',
         'send',
         'delivery',

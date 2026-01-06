@@ -13,4 +13,5 @@ class Template extends Model
     {
         return $this->belongsTo(School::class);
     }
+
 }
