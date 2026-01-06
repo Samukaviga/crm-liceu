@@ -5,7 +5,7 @@ use App\Models\School;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 
-it('should create a new templete', function () {
+it('should create a new template', function () {
 
 
     $school = School::create([

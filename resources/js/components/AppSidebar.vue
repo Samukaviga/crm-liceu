@@ -35,7 +35,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Templete Message',
+        title: 'Template Message',
         href: template(),
         icon: LayoutGrid,
     },
