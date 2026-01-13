@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Models\Template;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,8 @@ class TemplatesController extends Controller
     {
 //   return Inertia::render('ImportStatistics');
 
-        return Inertia::render('TemplateMessage');
+        return Inertia::render('TemplateMessage')
+                    ->with('schools', School::all());
 
     }
 
@@ -22,18 +24,19 @@ class TemplatesController extends Controller
         $request->validate(rules: [
             'name' => 'required|max:255',
             'number' => 'required',
-            'id_school' => 'required',
+            'school_id' => 'required',
         ]);
 
         Template::create([
-            'school_id' => $request->input('id_school'),
+            'school_id' => $request->input('school_id'),
             'name' => $request->input('name'),
             'number' => $request->input('number'),
+            'type' => $request->input('type'),
+            'campaign' => $request->input('campaign'),
+            'category' => $request->input('category'),
         ]);
 
-        return response()->json([
-            'message' => 'Template criado com sucesso!',
-        ], 201);
+        return redirect()->back()->with('success', 'Template criado com sucesso!');
 
     }
 }

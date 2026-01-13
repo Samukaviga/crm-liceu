@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->string('name')->nullable();
             $table->string('number')->nullable();
+            $table->string('type')->nullable();
+            $table->text('campaign')->nullable();
+            $table->text('category')->nullable();
             $table->timestamps();
         });
     }

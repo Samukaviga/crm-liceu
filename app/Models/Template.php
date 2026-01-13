@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     protected $table = 'templates';
-    protected $fillable = ['school_id', 'name', 'number'];
+    protected $fillable = ['school_id', 'name', 'number', 'type', 'campaign', 'category'];
 
     public function school()
     {

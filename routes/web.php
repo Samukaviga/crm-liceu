@@ -32,6 +32,11 @@ Route::get('template', [TemplatesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('template');
 
+Route::post('/templates', [TemplatesController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('template.store');
+
+
 /*
 Route::post('excel/import', [CrmController::class, 'store'])
     ->middleware(['auth', 'verified'])

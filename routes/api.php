@@ -19,8 +19,6 @@ Route::post('/statistics/upload', [StatisticsController ::class, 'store']);
 
 Route::get('/statistics/data', [StatisticsController ::class, 'data']);
 
-Route::post('/templates', [TemplatesController::class, 'store']);
-
 Route::get('/test-broadcast', function () {
     broadcast(new \App\Events\TestEvent());
     return 'Evento enviado!';
