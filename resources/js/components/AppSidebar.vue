@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, excel, statistics, template} from '@/routes';
+import { dashboard, excel, statistics, template } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
@@ -34,11 +34,26 @@ const mainNavItems: NavItem[] = [
         href: statistics(),
         icon: LayoutGrid,
     },
+
     {
-        title: 'Template Message',
-        href: template(),
-        icon: LayoutGrid,
+        title: 'Template',
+        icon: Folder,
+        children: [
+            {
+                title: 'Templates',
+                href: "#",
+            },
+            {
+                title: 'Adicionar Template',
+                href: template(),
+            },
+
+        ],
     },
+
+
+
+
 
 
 ];
@@ -53,7 +68,7 @@ const footerNavItems: NavItem[] = [
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#vue',
         icon: BookOpen,
-    },*/
+    }, */
 ];
 </script>
 
