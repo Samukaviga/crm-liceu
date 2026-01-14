@@ -29,10 +29,50 @@
                                     <option v-for="school in schools" :key="school.id" :value="school.id">
                                         {{ school.name }}
                                     </option>
-
                                 </select>
-
                             </div>
+
+                            <div class="mb-6">
+                                <label for="type"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Selecione o tipo
+                                </label>
+                                <select v-model="registerForm.type" required id="type"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" disabled>Escolha o tipo</option>
+                                    <option value="Financeiro">
+                                        Financeiro
+                                    </option>
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </div>
+
+                             <div class="mb-6">
+                                <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Nome da Campanha
+                                </label>
+                                <Input type="text" v-model="registerForm.campaign" />
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="category"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Selecione a categoria
+                                </label>
+                                <select v-model="registerForm.category" required id="category"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" disabled>Escolha a categoria</option>
+                                    <option value="Utilidade">
+                                        Utilidade
+                                    </option>
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </div>
+
 
                             <div class="mb-6">
                                 <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -48,14 +88,16 @@
                                 <Input type="text" v-model="registerForm.number" />
                             </div>
 
+
+
                             <button type="submit" :disabled="loading"
                                 class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800">
-                                {{ loading ? 'Enviando...' : 'Importar' }}
+                                {{ loading ? 'Enviando...' : 'Adicionar' }}
                             </button>
 
                             <div class="text-center max-w-xs p-2 mb-2 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                                 role="alert">
-                                habilite o arquivo para edição antes de importar<span class="font-bold "></span>
+                                Verifique todos os campos antes de adicionar<span class="font-bold "></span>
                             </div>
 
                         </form>
@@ -82,7 +124,6 @@ import { Input } from '@/components/ui/input'
 import { usePage, router } from '@inertiajs/vue3'
 import SuccessMessage from '@/components/ui/alert/SuccessMessage.vue'
 import ErrorMessage from '@/components/ui/alert/ErrorMessage.vue'
-import Button from '@/components/ui/button/Button.vue'
 
 
 const { props } = usePage()
@@ -103,12 +144,18 @@ type Template = {
     school_id: number | null;
     number: string;
     name: string;
+    type?: string;
+    campaign?: string;
+    category?: string;
 }
 
 const registerForm = reactive<Template>({
     school_id: null,
     number: '',
     name: '',
+    type: '',
+    campaign: '',
+    category: '',
 })
 
 
@@ -135,6 +182,9 @@ async function handleSubmit() {
                 registerForm.school_id = null;
                 registerForm.name = '';
                 registerForm.number = '';
+                registerForm.type = '';
+                registerForm.campaign = '';
+                registerForm.category = '';
             }
         })
 
@@ -143,7 +193,6 @@ async function handleSubmit() {
     }
 
 }
-
 
 
 </script>
