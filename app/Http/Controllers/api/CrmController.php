@@ -33,9 +33,6 @@ class CrmController extends Controller
 
         Excel::import(new ExcelImport($path), $path);
 
-        // Dispara o job
-        //ImportExcelJob::dispatch($path);
-
         return response()->json([
             'message' => 'Arquivo enviado com sucesso! A importação será processada em segundo plano.',
         ]);

@@ -12,7 +12,7 @@ class TemplatesApiController extends Controller
 {
     public function index()
     {
-//   return Inertia::render('ImportStatistics');
+        //   return Inertia::render('ImportStatistics');
 
 
     }
@@ -35,6 +35,15 @@ class TemplatesApiController extends Controller
         ]);
 
         return response()->json(['message' => 'Template criado com sucesso!'], 201);
+    }
+
+    public function destroy($id)
+    {
+
+        $template = Template::find($id);
+        $template->delete();
+
+        return response()->json(['message' => 'Template deletado com sucesso!'], 200);
 
     }
 }

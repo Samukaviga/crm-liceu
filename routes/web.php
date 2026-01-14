@@ -33,14 +33,21 @@ Route::get('template', [TemplatesController::class, 'index'])
     ->name('template');
 
 Route::post('/templates', [TemplatesController::class, 'store'])
-->middleware(['auth', 'verified'])
-->name('template.store');
-
-
-/*
-Route::post('excel/import', [CrmController::class, 'store'])
     ->middleware(['auth', 'verified'])
-    ->name('excel.import'); */
+    ->name('template.store');
+
+Route::delete('templates/{id}', [TemplatesController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('template.destroy');
+
+Route::put('templates/{id}', [TemplatesController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('template.update');
+
+Route::get('templates/list', [TemplatesController::class, 'list'])
+    ->middleware(['auth', 'verified'])
+    ->name('list');
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

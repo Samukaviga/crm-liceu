@@ -11,10 +11,16 @@ class TemplatesController extends Controller
 {
     public function index()
     {
-//   return Inertia::render('ImportStatistics');
 
         return Inertia::render('TemplateMessage')
                     ->with('schools', School::all());
+    }
+
+     public function list()
+    {
+
+         return Inertia::render('TemplateList')
+                    ->with('templates', Template::all());
 
     }
 
@@ -38,4 +44,29 @@ class TemplatesController extends Controller
         return redirect()->back()->with('success', 'Template criado com sucesso!');
 
     }
+
+    public function update(Request $request, $id)
+    {
+        $template = Template::find($id);
+
+        $template->name = $request->input('name') ?? $template->name;
+        $template->number = $request->input('number') ?? $template->number;
+        $template->type = $request->input('type') ?? $template->type;
+        $template->campaign = $request->input('campaign') ?? $template->campaign;
+        $template->category = $request->input('category') ?? $template->category;
+        $template->save();
+
+        return redirect()->back()->with('success', 'Template atualizado com sucesso!');
+    }
+
+     public function destroy($id)
+    {
+
+        $template = Template::find($id);
+        $template->delete();
+
+        return redirect()->back()->with('success', 'Template deletado com sucesso!');
+
+    }
+
 }
