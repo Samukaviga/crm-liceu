@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\CrmController;
 use App\Http\Controllers\Api\StatisticsController;
-use App\Http\Controllers\Api\TemplatesController;
+use App\Http\Controllers\TemplatesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
