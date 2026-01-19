@@ -18,34 +18,46 @@
                             <TableHeader>
                                 <TableRow>
                                     <TableHead class="w-[100px]">
-                                        Invoice
+                                        Nome Template
                                     </TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead>Method</TableHead>
-                                    <TableHead class="text-right">
-                                        Amount
+                                    <TableHead>Numero</TableHead>
+                                    <TableHead>Campanha</TableHead>
+                                    <TableHead>
+                                        Categoria
                                     </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <TableRow v-for="invoice in invoices" :key="invoice.invoice">
+                                <TableRow v-for="template in templates.data" :key="template.id">
                                     <TableCell class="font-medium">
-                                        {{ invoice.invoice }}
+                                        {{ template.name }}
                                     </TableCell>
-                                    <TableCell>{{ invoice.paymentStatus }}</TableCell>
-                                    <TableCell>{{ invoice.paymentMethod }}</TableCell>
-                                    <TableCell class="text-right">
-                                        {{ invoice.totalAmount }}
+                                    <TableCell>{{ template.number }}</TableCell>
+                                    <TableCell>{{ template.campaign }}</TableCell>
+                                    <TableCell>
+                                        {{ template.category }}
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
                             <TableFooter>
                                 <TableRow>
                                     <TableCell colspan="3">
-                                        Total
-                                    </TableCell>
-                                    <TableCell class="text-right">
-                                        $2,500.00
+                                        <div class="flex flex-col gap-6">
+                                            <TableRow>
+                                                <TableCell colspan="5">
+                                                    <div class="flex flex-wrap justify-center gap-2">
+                                                        <template v-for="link in templates.links" :key="link.label">
+                                                            <Link v-if="link.url" :href="link.url" v-html="link.label"
+                                                                class="px-3 py-1 text-sm border rounded"
+                                                                :class="{ 'bg-black text-white': link.active }" />
+
+                                                            <span v-else v-html="link.label"
+                                                                class="px-3 py-1 text-sm border rounded text-gray-400 cursor-not-allowed" />
+                                                        </template>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             </TableFooter>
@@ -53,18 +65,9 @@
 
                     </div>
 
-
-
-                    <div class="mt-6 sm:mt-8 lg:flex lg:items-center lg:gap-12">
-
-
-                    </div>
-
                 </div>
             </div>
         </section>
-
-
 
 
     </AppLayout>
@@ -74,6 +77,7 @@
 <script setup lang="ts">
 
 import AppLayout from '@/layouts/AppLayout.vue'
+import { Link } from '@inertiajs/vue3'
 
 import {
     Table,
@@ -85,50 +89,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table'
-const invoices = [
-    {
-        invoice: 'INV001',
-        paymentStatus: 'Paid',
-        totalAmount: '$250.00',
-        paymentMethod: 'Credit Card',
-    },
-    {
-        invoice: 'INV002',
-        paymentStatus: 'Pending',
-        totalAmount: '$150.00',
-        paymentMethod: 'PayPal',
-    },
-    {
-        invoice: 'INV003',
-        paymentStatus: 'Unpaid',
-        totalAmount: '$350.00',
-        paymentMethod: 'Bank Transfer',
-    },
-    {
-        invoice: 'INV004',
-        paymentStatus: 'Paid',
-        totalAmount: '$450.00',
-        paymentMethod: 'Credit Card',
-    },
-    {
-        invoice: 'INV005',
-        paymentStatus: 'Paid',
-        totalAmount: '$550.00',
-        paymentMethod: 'PayPal',
-    },
-    {
-        invoice: 'INV006',
-        paymentStatus: 'Pending',
-        totalAmount: '$200.00',
-        paymentMethod: 'Bank Transfer',
-    },
-    {
-        invoice: 'INV007',
-        paymentStatus: 'Unpaid',
-        totalAmount: '$300.00',
-        paymentMethod: 'Credit Card',
-    },
-]
+
+
+const props = defineProps(['templates'])
+
+
 
 
 </script>

@@ -20,7 +20,7 @@ class TemplatesController extends Controller
     {
 
          return Inertia::render('TemplateList')
-                    ->with('templates', Template::all());
+                    ->with('templates', Template::paginate(3));
 
     }
 
