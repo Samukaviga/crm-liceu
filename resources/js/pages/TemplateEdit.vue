@@ -10,7 +10,7 @@
             <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                 <div class="flex flex-col items-center mx-auto max-w-5xl">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                        Adicionar Novo Template
+                        Editar Template
                     </h2>
 
                     <div class="mt-6 sm:mt-8 lg:flex lg:items-center lg:gap-12">
@@ -89,15 +89,14 @@
                             </div>
 
 
-
                             <button type="submit" :disabled="loading"
                                 class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800">
-                                {{ loading ? 'Enviando...' : 'Adicionar' }}
+                                {{ loading ? 'Editando...' : 'Editar' }}
                             </button>
 
                             <div class="text-center max-w-xs p-2 mb-2 mt-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                                 role="alert">
-                                Verifique todos os campos antes de adicionar<span class="font-bold "></span>
+                                Verifique todos os campos antes de editar<span class="font-bold "></span>
                             </div>
 
                         </form>
@@ -129,7 +128,10 @@ import ErrorMessage from '@/components/ui/alert/ErrorMessage.vue'
 const { props } = usePage()
 const page = usePage()
 const schools = props.schools;
+const template = props.template;
 const showSuccess = ref(true)
+
+console.log('Scholls recebido:', schools);
 
 const success = computed(() =>
     showSuccess.value ? page.props.flash?.success : null
@@ -150,12 +152,12 @@ type Template = {
 }
 
 const registerForm = reactive<Template>({
-    school_id: null,
-    number: '',
-    name: '',
-    type: '',
-    campaign: '',
-    category: '',
+    school_id: template.school_id,
+    number: template.number,
+    name: template.name,
+    type: template.type,
+    campaign: template.campaign,
+    category: template.category,
 })
 
 
@@ -170,7 +172,7 @@ async function handleSubmit() {
     try {
         loading.value = true;
 
-        router.post('/templates', registerForm, {
+        router.put(`/templates/${template.id}`, registerForm, {
             onFinish: () => {
                 loading.value = false
             },
@@ -179,12 +181,7 @@ async function handleSubmit() {
                 messageError.value = Object.values(error);
             },
             onSuccess: () => {
-                registerForm.school_id = null;
-                registerForm.name = '';
-                registerForm.number = '';
-                registerForm.type = '';
-                registerForm.campaign = '';
-                registerForm.category = '';
+
             }
         })
 

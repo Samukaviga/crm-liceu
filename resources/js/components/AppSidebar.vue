@@ -46,7 +46,7 @@ const mainNavItems: NavItem[] = [
             {
                 title: 'Adicionar Template',
                 href: template(),
-            },
+            }
 
         ],
     },

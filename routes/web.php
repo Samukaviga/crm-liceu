@@ -32,17 +32,21 @@ Route::get('template', [TemplatesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('template');
 
-Route::post('/templates', [TemplatesController::class, 'store'])
+Route::get('templates/{id}/edit', [TemplatesController::class, 'edit'])
+    ->middleware(['auth', 'verified'])
+    ->name('edit');
+
+Route::post('templates', [TemplatesController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('template.store');
-
-Route::delete('templates/{id}', [TemplatesController::class, 'destroy'])
-    ->middleware(['auth', 'verified'])
-    ->name('template.destroy');
 
 Route::put('templates/{id}', [TemplatesController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('template.update');
+
+Route::delete('templates/{id}', [TemplatesController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('template.destroy');
 
 Route::get('templates/list', [TemplatesController::class, 'list'])
     ->middleware(['auth', 'verified'])

@@ -13,15 +13,21 @@ class TemplatesController extends Controller
     {
 
         return Inertia::render('TemplateMessage')
-                    ->with('schools', School::all());
+            ->with('schools', School::all());
     }
 
-     public function list()
+    public function list()
     {
+        $templates = Template::with('school')->paginate(3);
 
-         return Inertia::render('TemplateList')
-                    ->with('templates', Template::paginate(3));
+        return Inertia::render('TemplateList', ['templates' => $templates]);
+    }
 
+    public function edit(int $id)
+    {
+        $template = Template::find($id);
+
+        return Inertia::render('TemplateEdit', ['template' => $template, 'schools' => School::all()]);
     }
 
     public function store(Request $request)
@@ -42,7 +48,6 @@ class TemplatesController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Template criado com sucesso!');
-
     }
 
     public function update(Request $request, $id)
@@ -59,14 +64,12 @@ class TemplatesController extends Controller
         return redirect()->back()->with('success', 'Template atualizado com sucesso!');
     }
 
-     public function destroy($id)
+    public function destroy($id)
     {
 
         $template = Template::find($id);
         $template->delete();
 
         return redirect()->back()->with('success', 'Template deletado com sucesso!');
-
     }
-
 }
