@@ -20,4 +20,9 @@ class Analytic extends Model
         'cost_per_delivered',
         'cost_url_button_click',
     ];
+
+    public function template()
+    {
+        return $this->belongsTo(Template::class, 'template_id');
+    }
 }

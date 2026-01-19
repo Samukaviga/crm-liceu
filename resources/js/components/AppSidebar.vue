@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, excel, statistics, template, list} from '@/routes';
+import { dashboard, excel, statistics, template, list, analitics} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
@@ -46,6 +46,10 @@ const mainNavItems: NavItem[] = [
             {
                 title: 'Adicionar Template',
                 href: template(),
+            },
+            {
+                title: 'Analitics',
+                href: analitics(),
             }
 
         ],

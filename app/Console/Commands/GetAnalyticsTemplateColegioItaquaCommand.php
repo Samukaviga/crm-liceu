@@ -45,7 +45,6 @@ class GetAnalyticsTemplateColegioItaquaCommand extends Command
 
 
 
-
         foreach ($templates as $template) {
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnaliticsController;
 use App\Http\Controllers\Api\CrmController;
 use App\Http\Controllers\Api\StatisticsController;
 use App\Http\Controllers\TemplatesController;
@@ -35,6 +36,10 @@ Route::get('template', [TemplatesController::class, 'index'])
 Route::get('templates/{id}/edit', [TemplatesController::class, 'edit'])
     ->middleware(['auth', 'verified'])
     ->name('edit');
+
+Route::get('analitics', [AnaliticsController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('analitics');
 
 Route::post('templates', [TemplatesController::class, 'store'])
     ->middleware(['auth', 'verified'])
