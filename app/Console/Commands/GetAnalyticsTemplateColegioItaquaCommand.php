@@ -44,11 +44,18 @@ class GetAnalyticsTemplateColegioItaquaCommand extends Command
         $templates = Template::where('school_id', 1)->get();
 
 
+
+
         foreach ($templates as $template) {
 
 
             $response = $analyticsService->getAnalyticsData($template->number, $dateStart,  $dateCurrent);
 
+
+            if (isset($response->headers)) {
+                error("Erro ao obter dados analíticos para o Template ID: {$template->id}");
+                continue;
+            }
 
 
             foreach ($response['data'] ?? [] as $group) {
@@ -100,14 +107,11 @@ class GetAnalyticsTemplateColegioItaquaCommand extends Command
                             ]
                         );
 
-                        info($template->school() . "-- Template ID: $template->id Adicionado com sucesso, Data Início: $pointStartDate");
-
+                        info($template->school->name . " -- Template ID: $template->id Adicionado com sucesso, Data Início: $pointStartDate");
                     } catch (\Throwable $th) {
                         //throw $th;
                         error("Erro ao adicionar template - " . $th->getMessage());
                     }
-
-
                 }
             }
         }
