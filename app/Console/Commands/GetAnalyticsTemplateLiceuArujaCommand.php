@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Analytic;
 use App\Models\Template;
-use App\Services\AnalyticsLiceuItaqua;
+use App\Services\AnalyticsLiceuAruja;
 use Illuminate\Support\Carbon;
 
 use function Laravel\Prompts\error;
@@ -18,7 +18,7 @@ class GetAnalyticsTemplateLiceuArujaCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'get-analytics-template-liceu-aruja';
+    protected $signature = 'analytics-template-liceu-aruja';
 
     /**
      * The console command description.
@@ -39,7 +39,7 @@ class GetAnalyticsTemplateLiceuArujaCommand extends Command
 
         //$dateUTC = Carbon::createFromTimestampUTC($unixTimestamp);
 
-        $analyticsService = new AnalyticsLiceuItaqua();
+        $analyticsService = new AnalyticsLiceuAruja();
 
         $templates = Template::where('school_id', 4)->get();
 
