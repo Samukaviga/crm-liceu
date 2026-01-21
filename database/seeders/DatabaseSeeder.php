@@ -22,11 +22,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]); */
 
-
-        School::create([
-            'name' => 'Colégio Itaqua',
-        ]);
-
         Template::create([
             'school_id' => School::firstWhere('name', 'Colégio Itaqua')->id,
             'name' => 'lembete_v10',

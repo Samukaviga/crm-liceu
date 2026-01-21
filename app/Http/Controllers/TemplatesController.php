@@ -18,7 +18,7 @@ class TemplatesController extends Controller
 
     public function list()
     {
-        $templates = Template::with('school')->paginate(3);
+        $templates = Template::with('school')->orderBy('created_at', 'DESC')->paginate(3);
 
         return Inertia::render('TemplateList', ['templates' => $templates]);
     }

@@ -33,8 +33,7 @@
                             </div>
 
                             <div class="mb-6">
-                                <label for="type"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Selecione o tipo
                                 </label>
                                 <select v-model="registerForm.type" required id="type"
@@ -49,11 +48,18 @@
                                 </select>
                             </div>
 
-                             <div class="mb-6">
+                            <div class="mb-6">
                                 <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Nome da Campanha
+                                    Nome do Template
                                 </label>
-                                <Input type="text" v-model="registerForm.campaign" />
+                                <Input type="text" v-model="registerForm.name" />
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Numero do template
+                                </label>
+                                <Input type="text" v-model="registerForm.number" />
                             </div>
 
                             <div class="mb-6">
@@ -73,21 +79,12 @@
                                 </select>
                             </div>
 
-
                             <div class="mb-6">
                                 <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Nome do Template
+                                    Nome da Campanha
                                 </label>
-                                <Input type="text" v-model="registerForm.name" />
+                                <Input type="text" v-model="registerForm.campaign" />
                             </div>
-
-                            <div class="mb-6">
-                                <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Numero do template
-                                </label>
-                                <Input type="text" v-model="registerForm.number" />
-                            </div>
-
 
 
                             <button type="submit" :disabled="loading"

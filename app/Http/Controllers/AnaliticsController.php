@@ -13,7 +13,7 @@ class AnaliticsController extends Controller
      */
     public function index()
     {
-        $analitics = Analytic::with('template')->paginate(10);
+        $analitics = Analytic::with('template')->orderBy('start_date', 'DESC')->paginate(10);
 
         return Inertia::render('Analitics', ['analitics' => $analitics]);
     }

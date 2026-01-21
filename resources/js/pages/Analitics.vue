@@ -58,7 +58,6 @@
                                                             <Link v-if="link.url" :href="link.url" v-html="link.label"
                                                                 class="px-3 py-1 text-sm border rounded"
                                                                 :class="{ 'bg-black text-white': link.active }" />
-
                                                             <span v-else v-html="link.label"
                                                                 class="px-3 py-1 text-sm border rounded text-gray-400 cursor-not-allowed" />
                                                         </template>
