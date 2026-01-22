@@ -16,7 +16,7 @@ class AnalyticsColegioItaqua
 
 
 
-    protected $apiUrl = "https://graph.facebook.com/v24.0/224890660713486/template_analytics";
+    protected $apiUrl = "https://graph.facebook.com/v24.0/832587992816710/template_analytics";
     protected $token;
 
 
